@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using System.Xml.Linq;
+using MySql.Data.MySqlClient;
 
 namespace ProjectCRUDSederhana
 {
@@ -23,7 +24,34 @@ namespace ProjectCRUDSederhana
             LoadData();
         }
 
-        private void ClearForm()
+        private void LoadData()
+        {
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            try
+            {
+                conn.Open();
+                string query = "Select NIM, Nama, Email, Telpon, " +
+                               "Alamat from Mahasiswa";
+                MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dgvMahasiswa.AutoGenerateColumns = true;
+                dgvMahasiswa.DataSource = dt;
+
+                ClearForm();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Error: " +
+                    ex.Message, "Kesalahan",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+        }
+            private void ClearForm()
         {
             txtNIM.Clear();
             txtNama.Clear();
