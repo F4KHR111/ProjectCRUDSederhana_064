@@ -50,7 +50,7 @@ namespace ProjectCRUDSederhana
                 );
             }
         }
-            private void ClearForm()
+        private void ClearForm()
         {
             txtNIM.Clear();
             txtNama.Clear();
@@ -151,7 +151,61 @@ namespace ProjectCRUDSederhana
 
         private void btnHapus_Click(object sender, EventArgs e)
         {
+            if (dgvMahasiswa.SelectedRows.Count > 0)
+            {
+                DialogResult confirm = MessageBox.Show(
+                    "Yakin ingin menghapus data ini?", "Konfirmasi",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question
+                );
 
+                if (confirm == DialogResult.Yes)
+                {
+                    MySqlConnection conn = new MySqlConnection(connectionString);
+
+                    try
+                    {
+                        string nim = dgvMahasiswa.SelectedRows[0].Cells["NIM"].Value.ToString();
+                        conn.Open();
+                        string query = "DELETE FROM Mahasiswa WHERE NIM = @NIM";
+                        MySqlCommand cmd = new MySqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@NIM", nim);
+                        int rowsAffected = cmd.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show(
+                                "Data berhasil dihapus!", "Sukses",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information
+                            );
+                            LoadData();
+                            ClearForm();
+                        }
+                        else
+                        {
+                            MessageBox.Show(
+                                "Data tidak ditemukan atau gagal dihapus!", "Kesalahan",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error
+                            );
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(
+                            "Error: " + ex.Message, "Kesalahan",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error
+                        );
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Pilih data yang akan dihapus!", "Peringatan",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }
