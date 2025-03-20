@@ -228,8 +228,9 @@ namespace ProjectCRUDSederhana
             {
                 DataGridViewRow row = dgvMahasiswa.Rows[e.RowIndex];
 
-                
-            
+                txtNIM.Text = row.Cells[0].Value.ToString();
+
+
             }
         }
 
