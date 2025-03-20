@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using System.Xml.Linq;
 
 namespace ProjectCRUDSederhana
 {
@@ -16,9 +18,21 @@ namespace ProjectCRUDSederhana
         static string connectionString = string.Format(
         "Server=127.0.0.1; database = organisasiMahasiswa; UID = root; Password =[Sesuaikan dengan password root server kalian].");
 
-        public Form1()
+        private void Form1_Load(object sender, EventArgs e)
         {
-            InitializeComponent();
+            LoadData();
+        }
+
+        private void ClearForm()
+        {
+            txtNIM.Clear();
+            txtNama.Clear();
+            txtEmail.Clear();
+            txtTelepon.Clear();
+            txtAlamat.Clear();
+
+            // Fokus Kembali ke nim agar user siap memasukan data baru
+            txtNIM.Focus();
         }
 
         private void label1_Click(object sender, EventArgs e)
