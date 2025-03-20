@@ -207,5 +207,31 @@ namespace ProjectCRUDSederhana
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        private void btnReFresh_Click(object sender, EventArgs e)
+        {
+            LoadData();
+
+            // Debugging: Cek Jumlah kolom dan Baris
+            MessageBox.Show(
+                $"Jumlah Kolom: {dgvMahasiswa.ColumnCount}\n" +
+                $"Jumlah Baris: {dgvMahasiswa.RowCount}",
+                "Debugging DataGridView",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
+        }
+
+        private void dgvMahasiswa_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dgvMahasiswa.Rows[e.RowIndex];
+
+                
+            
+            }
+        }
+
     }
 }
