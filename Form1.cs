@@ -12,6 +12,10 @@ namespace ProjectCRUDSederhana
 {
     public partial class Form1 : Form
     {
+
+        static string connectionString = string.Format(
+        "Server=127.0.0.1; database = organisasiMahasiswa; UID = root; Password =[Sesuaikan dengan password root server kalian].");
+
         public Form1()
         {
             InitializeComponent();
