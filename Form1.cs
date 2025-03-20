@@ -16,8 +16,7 @@ namespace ProjectCRUDSederhana
     public partial class Form1 : Form
     {
 
-        static string connectionString = string.Format(
-        "Server=127.0.0.1; database = organisasiMahasiswa; UID = root; Password =[Sesuaikan dengan password root server kalian].");
+        private string connectionString = "Data Source=MSI/RM_FAKHRI_W; initial catalog=Mahasiswier;Integrated Security=True";
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -62,6 +61,8 @@ namespace ProjectCRUDSederhana
             // Fokus Kembali ke nim agar user siap memasukan data baru
             txtNIM.Focus();
         }
+
+
 
         private void label1_Click(object sender, EventArgs e)
         {
